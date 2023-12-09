@@ -33,7 +33,7 @@ button{
 .operation{
     background-color: orange;
 }
-.clear{
+#clear{
     width: 13.5rem;
     background-color: rgb(248, 83, 83);
 }
