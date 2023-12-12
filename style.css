@@ -37,15 +37,11 @@ button:active{
     padding: 0.5rem 0;
     margin: 0.75rem 2rem;
 }
-.operation{
+.orange{
     background-color: orange;
+    color: white;
 }
 #clear{
     width: 6.5rem;
     background-color: rgb(248, 83, 83);
-}
-
-/*If the number is too big, it will shrink to fit into the outputBox*/
-.tooManyNum{ 
-    font-size: 1.5rem;
 }
