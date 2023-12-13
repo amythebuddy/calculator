@@ -9,6 +9,7 @@ let isFirstDigit = true; // for the first input digit
 let isFirstDigit2 = true; // for the second input digit
 let isNegative = false; // for the negative number
 let isClicked = false; // for the operation 
+let isSecondDecimal = false; // in case the user clicks the . twice
 let calculation = ""; // store the calculation
 let amountOfCalculation = 0;
 let arrFactorial = [];
