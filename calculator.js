@@ -4,12 +4,11 @@ const clear = document.getElementById('clear');
 const equal = document.getElementById('equal');
 const negative = document.getElementById('neg');
 const factorial = document.getElementById('factorial');
-let output = document.getElementById('outputBox');
+const output = document.getElementById('outputBox');
 let isFirstDigit = true; // for the first input digit
 let isFirstDigit2 = true; // for the second input digit
-let isNegative = false; // for the negative number
 let isClicked = false; // for the operation 
-let isSecondDecimal = false; // in case the user clicks the . twice
+let isDecimal = false; // in case the user clicks the . twice
 let calculation = ""; // store the calculation
 let amountOfCalculation = 0;
 let arrFactorial = [];
@@ -24,15 +23,20 @@ function showNum(event){
     negative.onclick = function() {
         if(output.innerText.includes('-')){
             output.innerText = output.innerText.slice(1);
-            isNegative = false;
         } else { // else add the negative sign
             output.innerText = '-' + output.innerText;
-            isNegative = true;
         }
         calculation = output.innerText;
     };
 
-
+    // if the decimal button is clicked twice, the user will get alert
+    if(clickedBtn.innerText === ".") {
+        if(isDecimal) {
+            alert('You cannot have 2 decimal points in a number!');
+            return;
+        }
+        isDecimal = true;
+    }
 
     if(isFirstDigit) {// if the first digit input, it removes the default 0
         output.innerText = clickedBtn.innerText; 
@@ -50,6 +54,7 @@ function showNum(event){
         calculation = output.innerText;
     }
     isFirstDigit = false; // to stop changing the digit
+    
 
     calcBtns.forEach((calc) => { // operation
         calc.onclick = function(event){
@@ -64,6 +69,7 @@ function showNum(event){
             if(amountOfCalculation > 1) { //if there is more than 1 calculation, add on the second number every time
                 isFirstDigit2 = true; 
             }
+            isDecimal = false; // for the second number to add decimal number
         }
     });
 
@@ -72,6 +78,7 @@ function showNum(event){
         isFirstDigit = true;
         isFirstDigit2 = true;
         isClicked = false;
+        isDecimal = false;
         calculation = "";
         amountOfCalculation = 0;
     };
@@ -79,7 +86,7 @@ function showNum(event){
     equal.onclick = function() {
         let result = Function("return " + calculation)(); // calculate the expression using the Function constructor
         
-        if(result == undefined){ 
+        if(result == undefined){  
             alert("You need to input number first before pressing equal!");
             return;
         }
@@ -99,7 +106,7 @@ function showNum(event){
 }
 
 function calcFactorial(n) { //using recursive to do factorial
-    if(n < 0) {
+    if(n < 0) { // negative number cannot be factorial
         output.innerText = "ERROR";
     }
     if (n == 0 || n == 1) return 1;
